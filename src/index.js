@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import {
     Container,
     Display,
-    DisplayOperações,
+    DisplayOperacoes,
     DisplayResultado,
-    DisplayOperaçõesText,
+    DisplayOperacoesText,
     DisplayResultadoText,
     Content,
     LineButton,
@@ -23,20 +23,46 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // import { Container } from './styles';
 
 export default function index() {
+    const [num1, setNum1] = useState('');
+    const [num2, setNum2] = useState('');
+    const [ope, setOpe] = useState(false);
+    const [qualOpe, setQualOpe] = useState('');
+    const [result, setResult] = useState(0);
+    const [conta, setConta] = useState('');
+
+    function qualNumero(num) {
+        if (ope) {
+            setNum2(num2 + num);
+            setConta(conta + num2);
+        } else if (!ope) {
+            setNum1(num1 + num);
+            setConta(num1+num);
+
+            // setResult(parseInt(num1) + parseInt(num2));
+        }
+    }
+
+    function clear() {
+        setNum1('');
+        setNum2('');
+        setResult(0);
+        setConta('');
+    }
+
     return (
         <Container>
             <Display>
-                <DisplayOperações>
-                    <DisplayOperaçõesText>16 + 16</DisplayOperaçõesText>
-                </DisplayOperações>
+                <DisplayOperacoes>
+                    <DisplayOperacoesText>{conta}</DisplayOperacoesText>
+                </DisplayOperacoes>
                 <DisplayResultado>
                     <DisplayResultadoText>32</DisplayResultadoText>
                 </DisplayResultado>
             </Display>
             <Content>
                 <LineButton>
-                    <ButtonSinais>
-                        <ButtonSinaisText style={{color:'#ff0000'}}>C</ButtonSinaisText>
+                    <ButtonSinais onPress={clear}>
+                        <ButtonSinaisText style={{ color: '#ff0000' }}>C</ButtonSinaisText>
                     </ButtonSinais>
                     <ButtonSinais>
                         <ButtonSinaisText>()</ButtonSinaisText>
@@ -49,13 +75,13 @@ export default function index() {
                     </ButtonSinais>
                 </LineButton>
                 <LineButton>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(7)}>
                         <ButtonNumbersText>7</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(8)}>
                         <ButtonNumbersText>8</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(9)}>
                         <ButtonNumbersText>9</ButtonNumbersText>
                     </ButtonNumbers>
                     <ButtonSinais>
@@ -63,13 +89,13 @@ export default function index() {
                     </ButtonSinais>
                 </LineButton>
                 <LineButton>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(4)}>
                         <ButtonNumbersText>4</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(5)}>
                         <ButtonNumbersText>5</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(6)}>
                         <ButtonNumbersText>6</ButtonNumbersText>
                     </ButtonNumbers>
                     <ButtonSinais>
@@ -77,16 +103,16 @@ export default function index() {
                     </ButtonSinais>
                 </LineButton>
                 <LineButton>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(1)}>
                         <ButtonNumbersText>1</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(2)}>
                         <ButtonNumbersText>2</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(3)}>
                         <ButtonNumbersText>3</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonSinais>
+                    <ButtonSinais onPress={() => setConta(conta + " +")}>
                         <ButtonSinaisText>+</ButtonSinaisText>
                     </ButtonSinais>
                 </LineButton>
@@ -94,14 +120,14 @@ export default function index() {
                     <ButtonNumbers>
                         <ButtonNumbersText>,</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero(0)}>
                         <ButtonNumbersText>0</ButtonNumbersText>
                     </ButtonNumbers>
                     <ButtonNumbers>
                         <ButtonNumbersText>.</ButtonNumbersText>
                     </ButtonNumbers>
                     <ButtonSinais>
-                        <ButtonSinaisText style={{color:'#00ff00'}}>=</ButtonSinaisText>
+                        <ButtonSinaisText style={{ color: '#00ff00' }}>=</ButtonSinaisText>
                     </ButtonSinais>
                 </LineButton>
             </Content>

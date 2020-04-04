@@ -18,13 +18,13 @@ export const Display = styled.View`
     padding-right: 10px;
 `;
 
-export const DisplayOperações = styled.View`
+export const DisplayOperacoes = styled.View`
     height:40%;
     width: 100%;
     justify-content:center;
 `;
 
-export const DisplayOperaçõesText = styled.Text`
+export const DisplayOperacoesText = styled.Text`
     width: 100%;
     text-align: right;
     font-family:BalooPaaji2-Regular;
@@ -69,7 +69,7 @@ export const ButtonNumbers =styled.TouchableOpacity`
     width:20%;
     height: 90%;
     background-color:#FFF;
-    border-radius: 25px;
+    border-radius: 15px;
     border-width: 1px;
     border-color: #38b6ff;
     align-self: center;
@@ -88,7 +88,7 @@ export const ButtonSinais =styled.TouchableOpacity`
     width:20%;
     height: 90%;
     background-color:#38b6ff;
-    border-radius: 25px;
+    border-radius: 15px;
     border-width: 1px;
     border-color: #38b6ff;
     align-self: center;
