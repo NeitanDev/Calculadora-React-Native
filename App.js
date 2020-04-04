@@ -1,19 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Text,
+  View,
+  StatusBar
+} from 'react-native';
+import * as Font from 'expo-font';
+import Index from './src/index';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+export default class App extends React.Component {
+  state = {
+    fontLoaded: false,
+  };
+  async componentDidMount() {
+    await Font.loadAsync({
+      'BalooPaaji2-Regular': require('./assets/fonts/BalooPaaji2-Regular.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+  render() {
+    return (
+      <>
+      {
+        //<StatusBar backgroundColor="#87c5b6"/>
+      }
+        {
+          this.state.fontLoaded ? (
+            <Index />
+          ) : null
+        }
+      </>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

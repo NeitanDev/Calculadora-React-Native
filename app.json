@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "HelloWorld",
+    "name": "Caculadora",
     "slug": "Calculadora",
     "platforms": [
       "ios",
@@ -9,11 +9,11 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconcalculadora.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashcalculator.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#38b6ff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,6 +23,12 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#38b6ff"
+    },
+    "androidNavigationBar":{
+      "backgroundColor": "#FFF"
     }
   }
 }
