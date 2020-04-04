@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
 import {
     Container,
     Display,
@@ -14,31 +13,45 @@ import {
     ButtonSinais,
     ButtonSinaisText,
 } from './styles/index';
-import { MaterialIcons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-
-// import { Container } from './styles';
 
 export default function index() {
     const [num1, setNum1] = useState('');
     const [num2, setNum2] = useState('');
     const [ope, setOpe] = useState(false);
-    const [qualOpe, setQualOpe] = useState('');
+    const [qualOpe, setQualOpe] = useState(0);
     const [result, setResult] = useState(0);
     const [conta, setConta] = useState('');
 
     function qualNumero(num) {
         if (ope) {
             setNum2(num2 + num);
-            setConta(conta + num2);
+            setConta(conta + num);
         } else if (!ope) {
             setNum1(num1 + num);
-            setConta(num1+num);
+            setConta(num1 + num);
+            // setResult(parseFloat(num1) + parseFloat(num2)); ÷
+        }
+    }
 
-            // setResult(parseInt(num1) + parseInt(num2));
+    function realizaOperação() {
+        switch (qualOpe) {
+            case 0: setResult(parseFloat(num1));
+                break;
+            case 1:
+                setResult(parseFloat(num1) + parseFloat(num2));
+                break;
+            case 2:
+                setResult(parseFloat(num1) - parseFloat(num2));
+                break;
+            case 3:
+                setResult(parseFloat(num1) * parseFloat(num2));
+                break;
+            case 4:
+                setResult(parseFloat(num1) / parseFloat(num2));
+                break;
         }
     }
 
@@ -47,6 +60,8 @@ export default function index() {
         setNum2('');
         setResult(0);
         setConta('');
+        setQualOpe(0);
+        setOpe(false);
     }
 
     return (
@@ -56,7 +71,7 @@ export default function index() {
                     <DisplayOperacoesText>{conta}</DisplayOperacoesText>
                 </DisplayOperacoes>
                 <DisplayResultado>
-                    <DisplayResultadoText>32</DisplayResultadoText>
+                    <DisplayResultadoText>{result}</DisplayResultadoText>
                 </DisplayResultado>
             </Display>
             <Content>
@@ -70,7 +85,11 @@ export default function index() {
                     <ButtonSinais>
                         <ButtonSinaisText>%</ButtonSinaisText>
                     </ButtonSinais>
-                    <ButtonSinais>
+                    <ButtonSinais onPress={() => {
+                        setQualOpe(4);
+                        setConta(conta + " ÷ ");
+                        setOpe(true);
+                    }}>
                         <MaterialCommunityIcons name="division" size={35} color="#fff" style={{ textAlign: "center" }} />
                     </ButtonSinais>
                 </LineButton>
@@ -84,7 +103,11 @@ export default function index() {
                     <ButtonNumbers onPress={() => qualNumero(9)}>
                         <ButtonNumbersText>9</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonSinais>
+                    <ButtonSinais onPress={() => {
+                        setQualOpe(3);
+                        setConta(conta + " x ");
+                        setOpe(true);
+                    }}>
                         <Feather name="x" size={30} color="#fff" style={{ textAlign: "center" }} />
                     </ButtonSinais>
                 </LineButton>
@@ -98,7 +121,11 @@ export default function index() {
                     <ButtonNumbers onPress={() => qualNumero(6)}>
                         <ButtonNumbersText>6</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonSinais>
+                    <ButtonSinais onPress={() => {
+                        setQualOpe(2);
+                        setConta(conta + " - ");
+                        setOpe(true);
+                    }}>
                         <Ionicons name="ios-remove" size={40} color="#fff" style={{ textAlign: "center" }} />
                     </ButtonSinais>
                 </LineButton>
@@ -112,7 +139,11 @@ export default function index() {
                     <ButtonNumbers onPress={() => qualNumero(3)}>
                         <ButtonNumbersText>3</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonSinais onPress={() => setConta(conta + " +")}>
+                    <ButtonSinais onPress={() => {
+                        setQualOpe(1);
+                        setConta(conta + " + ");
+                        setOpe(true);
+                    }}>
                         <ButtonSinaisText>+</ButtonSinaisText>
                     </ButtonSinais>
                 </LineButton>
@@ -123,10 +154,10 @@ export default function index() {
                     <ButtonNumbers onPress={() => qualNumero(0)}>
                         <ButtonNumbersText>0</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonNumbers>
+                    <ButtonNumbers onPress={() => qualNumero('.')}>
                         <ButtonNumbersText>.</ButtonNumbersText>
                     </ButtonNumbers>
-                    <ButtonSinais>
+                    <ButtonSinais onPress={realizaOperação}>
                         <ButtonSinaisText style={{ color: '#00ff00' }}>=</ButtonSinaisText>
                     </ButtonSinais>
                 </LineButton>
