@@ -4,8 +4,7 @@
     "slug": "Calculadora",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,13 +21,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.neitandev.calculadora",
+      "buildNumber": "1.0.0"
     },
     "androidStatusBar": {
       "backgroundColor": "#38b6ff"
     },
-    "androidNavigationBar":{
+    "androidNavigationBar": {
       "backgroundColor": "#FFF"
-    }
+    },
+    "android": {
+      "package": "com.neitandev.calculadora",
+      "versionCode": 1
+    },
+    "description": ""
   }
 }
